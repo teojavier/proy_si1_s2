@@ -4,10 +4,12 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Usuarios') }}
             </h2>
-            <a class="px-3 py-2 rounded-lg bg-green-600 text-white hover:bg-green-800"
-                href="{{ route('usuario.create') }}">
-                Registrar Usuario
-            </a>
+            @can('Crear Usuarios')
+                <a class="px-3 py-2 rounded-lg bg-green-600 text-white hover:bg-green-800"
+                    href="{{ route('usuario.create') }}">
+                    Registrar Usuario
+                </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -81,19 +83,24 @@
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <div class="flex flex-wrap justify-between">
-                                            <a class="px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-800"
-                                                href="{{ route('usuario.edit', $usuario->id) }}">
-                                                Editar
-                                            </a>
+                                            @can('Editar Usuarios')
+                                                <a class="px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-800"
+                                                    href="{{ route('usuario.edit', $usuario->id) }}">
+                                                    Editar
+                                                </a>
+                                            @endcan
                                             <div>
-                                                <form action="{{ route('usuario.delete', $usuario->id) }}"
-                                                    method="POST" onsubmit="return confirm('Seguro de eliminar?')">
-                                                    @csrf
-                                                    <button type="submit"
-                                                        class="px-3 py-2 rounded-lg bg-red-600 text-white hover:bg-red-800 mr-5">
-                                                        Eliminar
-                                                    </button>
-                                                </form>
+
+                                                @can('Eliminar Usuarios')
+                                                    <form action="{{ route('usuario.delete', $usuario->id) }}"
+                                                        method="POST" onsubmit="return confirm('Seguro de eliminar?')">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="px-3 py-2 rounded-lg bg-red-600 text-white hover:bg-red-800 mr-5">
+                                                            Eliminar
+                                                        </button>
+                                                    </form>
+                                                @endcan
                                             </div>
                                         </div>
                                     </td>

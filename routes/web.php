@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,18 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::post('usuarios/update/user_id={id}', [UsuarioController::class, 'update'])->name('usuario.update');
 
     Route::post('usuarios/delete/user_id={id}', [UsuarioController::class, 'delete'])->name('usuario.delete');
+
+
+
+    Route::get('roles/index', [RoleController::class, 'index'])->name('rol.index');
+    Route::get('roles/create', [RoleController::class, 'create'])->name('rol.create');
+    Route::get('roles/edit/rol_id={id}', [RoleController::class, 'edit'])->name('rol.edit');
+    Route::post('roles/update/rol_id={id}', [RoleController::class, 'update'])->name('rol.update');
+    Route::post('roles/delete/rol_id={id}', [RoleController::class, 'delete'])->name('rol.delete');
+
+
+
+
 
 
     
