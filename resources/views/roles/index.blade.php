@@ -5,9 +5,11 @@
                 {{ __('Roles') }}
             </h2>
 
-            <a class="px-3 py-2 rounded-lg bg-green-600 text-white hover:bg-green-800" href="{{ route('rol.create') }}">
-                Registrar Rol
-            </a>
+            @can('Crear Roles')
+                <a class="px-3 py-2 rounded-lg bg-green-600 text-white hover:bg-green-800" href="{{ route('rol.create') }}">
+                    Registrar Rol
+                </a>
+            @endcan
         </div>
     </x-slot>
 

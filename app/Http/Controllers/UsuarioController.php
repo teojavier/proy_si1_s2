@@ -35,7 +35,8 @@ class UsuarioController extends Controller
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required|min:8',
             'departament_id' => 'required',
-            'profile_photo_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'profile_photo_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'roles' => 'required|array'
         ]);
 
         $url = $this->storageUserImage($request->profile_photo_url);
@@ -46,7 +47,7 @@ class UsuarioController extends Controller
             'password' => bcrypt($request->password),
             'departamento_id' => $request->departament_id,
             'profile_photo_path' => $url
-        ]);
+        ])->syncRoles($request->roles);
 
         $bitacora = new Bitacora();
         $bitacora->usuario = auth()->user()->id;
@@ -76,6 +77,7 @@ class UsuarioController extends Controller
             'name' => 'required|min:5|max:100',
             'email' => 'required|email',
             'departament_id' => 'required',
+            'roles' => 'required|array'
         ]);
 
         $usuario = User::find($user_id);
@@ -92,6 +94,7 @@ class UsuarioController extends Controller
         }
 
         $usuario->save();
+        $usuario->syncRoles($request->roles);
 
         $bitacora = new Bitacora();
         $bitacora->usuario = auth()->user()->id;

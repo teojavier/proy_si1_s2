@@ -32,6 +32,7 @@
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     ACCIONES
                                 </th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -61,55 +62,58 @@
                                             </p>
                                         @endforeach
                                     </td>
+
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <div class="flex flex-wrap justify-between">
-
-                                            <a class="px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-800"
-                                                href="{{ route('rol.edit', $rol->id) }}">
-                                                Editar
-                                            </a>
-                                            <form action="{{ route('rol.delete', $rol->id) }}" method="POST"
-                                                onsubmit="return false;">
-                                                @csrf
-                                                <button type="button" id="btnEliminarRol"
-                                                    class="px-3 py-2 rounded-lg bg-red-600 text-white hover:bg-red-800 mr-5">
-                                                    Eliminar
-                                                </button>
-                                            </form>
+                                            @can('Editar Roles')
+                                                <a class="px-3 py-2 rounded-lg bg-blue-600 text-white hover-bg-blue-800"
+                                                    href="{{ route('rol.edit', $rol->id) }}">
+                                                    Editar
+                                                </a>
+                                            @endcan
+                                            @can('Eliminar Roles')
+                                                <form action="{{ route('rol.delete', $rol->id) }}" method="POST"
+                                                    onsubmit="return false;">
+                                                    @csrf
+                                                    <button type="button" id="btnEliminarRol"
+                                                        class="px-3 py-2 rounded-lg bg-red-600 text-white hover-bg-red-800 mr-5">
+                                                        Eliminar
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </div>
-                </div>
-                </td>
-                </tr>
-                @endforeach
-                </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-                <script>
-                    const btnEliminarRol = document.getElementById('btnEliminarRol');
+                    <script>
+                        const btnEliminarRol = document.getElementById('btnEliminarRol');
 
-                    btnEliminarRol.addEventListener('click', function() {
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You won't be able to revert this!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
-                                    'success'
-                                )
-                                // document.querySelector('form').submit();
-                            }
+                        btnEliminarRol.addEventListener('click', function() {
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, delete it!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    )
+                                    // document.querySelector('form').submit();
+                                }
+                            })
                         })
-                    })
-                </script>
+                    </script>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>

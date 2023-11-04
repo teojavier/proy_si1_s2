@@ -43,13 +43,14 @@
                 @enderror
             </div>
 
-
+            @can('Actualizar Roles')
             <div class="mt-3">
                 <button type="submit" class="rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 px-5 py-3">
                     <i class="fa-solid fa-floppy-disk"></i>
                     Actualizar
                 </button>
             </div>
+            @endcan
         </div>
         {!! Form::close() !!}
 </div>

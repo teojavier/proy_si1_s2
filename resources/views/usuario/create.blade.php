@@ -88,6 +88,9 @@
 
             </div>
             <div class="mt-3">
+                @livewire('user-rol-create')
+            </div>
+            <div class="mt-5">
                 <button type="submit" class="rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 px-5 py-3">
                     <i class="fa-solid fa-floppy-disk"></i>
                     Guardar
